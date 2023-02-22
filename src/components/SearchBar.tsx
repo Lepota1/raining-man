@@ -19,7 +19,7 @@ export const SearchBar: React.FC<{ data: DataType[] }> = ({
     setWordEntered(searchWord);
 
     const newFilter: DataType[] = data.filter(({ city }): boolean =>
-      city.toLowerCase().includes(searchWord.toLowerCase())
+      city.toLowerCase().startsWith(searchWord.toLowerCase())
     );
 
     if (!searchWord) return setFilteredData([]);
@@ -36,7 +36,7 @@ export const SearchBar: React.FC<{ data: DataType[] }> = ({
     setWordEntered(serchTerm);
 
     const newFilter: DataType[] = data.filter(({ city }): boolean =>
-      city.toLowerCase().includes(serchTerm.toLowerCase())
+      city.toLowerCase().startsWith(serchTerm.toLowerCase())
     );
 
     if (!serchTerm) return setFilteredData([]);
@@ -44,8 +44,8 @@ export const SearchBar: React.FC<{ data: DataType[] }> = ({
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <form className="flex items-center justify-center w-1/2">
+    <div className="flex flex-col items-center w-full">
+      <form className="flex items-center justify-center w-full">
         <label htmlFor="simple-search" className="sr-only">
           Search
         </label>
@@ -104,7 +104,7 @@ export const SearchBar: React.FC<{ data: DataType[] }> = ({
 
       {filteredData.length !== 0 && filteredData[0].city !== wordEntered && (
         <div className="w-80 h-full bg-white  rounded-xl mt-2 overflow-hidden overflow-y-auto scrollbar-hide border-black border-2 ">
-          {filteredData.slice(0, 8).map(({ city }, key) => (
+          {filteredData.slice(0, 4).map(({ city }, key) => (
             <div
               className="w-full h-14 flex items-center text-black pl-3 hover:bg-gray-300  "
               key={key}
